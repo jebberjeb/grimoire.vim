@@ -9,7 +9,7 @@ Vim support for [Clojure Grimoire](http://conj.io)
 
 TODO
 ====
-
+* _make it work with macros_!
 * cache api calls
 * check for names, namespaces (using api)
 * help doc
