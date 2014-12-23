@@ -13,3 +13,8 @@ TODO
 * cache api calls
 * check for names, namespaces (using api)
 * help doc
+
+License
+=======
+
+Distributed under the same terms as Vim itself. See :help license
