@@ -3,30 +3,13 @@ let g:grimoire#api_base_url = g:grimoire#base_url . "/api/v0"
 let g:grimoire#doc_base_url = g:grimoire#base_url . "/store/"
 
 function! grimoire#get_maven_info(symbol_info)
-    let name = get(a:symbol_info, 'ns') . '/' . get(a:symbol_info, 'name')
-    let code =
-        \ "(let [code-url (-> " . name . " .getClass " .
-        \ "                   .getProtectionDomain ".
-        \ "                   .getCodeSource " .
-        \ "                   .getLocation) " .
-        \ "      jar (java.util.jar.JarFile. (.getPath code-url)) " .
-        \ "      entries (enumeration-seq (.entries jar)) " .
-        \ "      entry (filter #(.contains (.getName %) \"pom.properties\")" .
-        \ "                    entries)] " .
-        \ "  (into {} (doto (java.util.Properties.) " .
-        \ "             (.load (.getInputStream jar (first entry))))))"
-    return fireplace#evalparse(code)
+    let name = get(a:symbol_info, 'ns')
+    call fireplace#eval("(require 'grimvim.core)")
+    return fireplace#evalparse('(grimvim.core/get-maven-info "' . name . '")')
 endfunction
 
 function! grimoire#munge_name(name)
-    let code =
-        \ '(-> "' . a:name . '" ' .
-        \ '  (clojure.string/replace "?" "_QMARK_") ' .
-        \ '  (clojure.string/replace "." "_DOT_") ' .
-        \ '  (clojure.string/replace "/" "_SLASH_") ' .
-        \ '  (clojure.string/replace #"^_*" "") ' .
-        \ '  (clojure.string/replace #"_*$" ""))'
-    return fireplace#evalparse(code)
+    return fireplace#evalparse('(grimoire.util/munge "' . a:name . '")')
 endfunction
 
 function! grimoire#make_api_url(query)
