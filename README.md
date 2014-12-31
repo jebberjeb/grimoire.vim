@@ -12,10 +12,21 @@ Dependencies
 
 * [vim-fireplace](https://github.com/tpope/vim-fireplace)
 
+Installation
+============
+
+First, install the Vim plugin. Using Vundle, you'd add the following to your
+config:
+
+    `Plugin 'jebberjeb/grimoire.vim'`
+
+Next, add the Leiningen dependency (preferably to your ~/.lein/profiles.clj):
+
+    `[grimvim "0.1.0"]`
+
 TODO
 ====
 
-* _make it work with macros_!
 * cache api calls
 * check for names, namespaces (using api)
 * help doc
