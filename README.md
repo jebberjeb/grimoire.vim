@@ -24,6 +24,9 @@ Next, add the Leiningen dependency (preferably to your ~/.lein/profiles.clj):
 
     [grimvim "0.1.0"]
 
+In your .vimrc, override g:grimoire#version to point to a different version
+of Clojure if needed (defaults to 1.7.0).
+
 TODO
 ====
 

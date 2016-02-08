@@ -1,6 +1,7 @@
 let g:grimoire#base_url = "http://conj.io"
 let g:grimoire#api_base_url = g:grimoire#base_url . "/api/v0"
 let g:grimoire#doc_base_url = g:grimoire#base_url . "/store/"
+let g:grimoire#version = "1.7.0"
 
 function! grimoire#get_maven_info(symbol_info)
     let name = get(a:symbol_info, 'ns')
@@ -47,7 +48,8 @@ function! grimoire#get_doc_url_of_current_word()
     let maven_info = grimoire#get_maven_info(symbol_info)
     let namespace = get(symbol_info, 'ns')
     let name = get(symbol_info, 'name')
-    let ver = get(maven_info, 'version')
+    "let ver = get(maven_info, 'version')
+    let ver = g:grimoire#version
     let group_id = get(maven_info, 'groupId')
     let artifact_id = get(maven_info, 'artifactId')
     call grimoire#check_group_supported(group_id)
